@@ -4,17 +4,19 @@
 {% load staticfiles %}
 	<meta charset="UTF-8">
 	<title>Grupo Kimera</title>
+	<link href='http://fonts.googleapis.com/css?family=Roboto:400,300,500,700,900|Roboto+Condensed:400,700' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" href="{% static "css/estilos.css" %}" />
 </head>
 <body>
 {% include "header.html" %}
 {% block content %}
 {% endblock content %}
-
 <!-- Javascript -->
 <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 <script src="{% static "js/underscore.js" %}"></script>
 <script src="{% static "js/backbone.js" %}"></script>
+<script src="{% static "js/plugins.js" %}"></script>
+<script src="{% static "js/kimera.js" %}"></script>
 </body>
 </html>
