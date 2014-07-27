@@ -2,10 +2,19 @@
 {% load staticfiles %}
 {% block content %}
 	{% if slides %}
-		<section id="Cont-Slides">
+		<section id="Cont-Slides" class="cycle-slideshow" data-cycle-fx="scrollHorz"
+		                                                  data-cycle-swipe=true
+														  data-cycle-slides="> article"
+														  data-cycle-timeout="0"
+														  data-cycle-prev=".btn-ant"
+    													  data-cycle-next=".btn-sig" >
+
+
 			{% for slide in slides  %}
 				<article class="slide">
 					<img src="{{ MEDIA_URL }}{{slide.imagen}}" alt="{{slide.nombre}}">
+					<div class="btn-ant btn-ctrl"> </div>
+					<div class="btn-sig btn-ctrl"> </div>
 					{% autoescape off %}
 						{{slide.html}}
 					{% endautoescape %}

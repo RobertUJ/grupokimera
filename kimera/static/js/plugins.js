@@ -14,3 +14,119 @@ function(a){"use strict";a.extend(a.fn.cycle.defaults,{next:"> .cycle-next",next
 function(a){"use strict";a.extend(a.fn.cycle.defaults,{progressive:!1}),a(document).on("cycle-pre-initialize",function(b,c){if(c.progressive){var d,e,f=c.API,g=f.next,h=f.prev,i=f.prepareTx,j=a.type(c.progressive);if("array"==j)d=c.progressive;else if(a.isFunction(c.progressive))d=c.progressive(c);else if("string"==j){if(e=a(c.progressive),d=a.trim(e.html()),!d)return;if(/^(\[)/.test(d))try{d=a.parseJSON(d)}catch(k){return void f.log("error parsing progressive slides",k)}else d=d.split(new RegExp(e.data("cycle-split")||"\n")),d[d.length-1]||d.pop()}i&&(f.prepareTx=function(a,b){var e,f;return a||0===d.length?void i.apply(c.API,[a,b]):void(b&&c.currSlide==c.slideCount-1?(f=d[0],d=d.slice(1),c.container.one("cycle-slide-added",function(a,b){setTimeout(function(){b.API.advanceSlide(1)},50)}),c.API.add(f)):b||0!==c.currSlide?i.apply(c.API,[a,b]):(e=d.length-1,f=d[e],d=d.slice(0,e),c.container.one("cycle-slide-added",function(a,b){setTimeout(function(){b.currSlide=1,b.API.advanceSlide(-1)},50)}),c.API.add(f,!0)))}),g&&(f.next=function(){var a=this.opts();if(d.length&&a.currSlide==a.slideCount-1){var b=d[0];d=d.slice(1),a.container.one("cycle-slide-added",function(a,b){g.apply(b.API),b.container.removeClass("cycle-loading")}),a.container.addClass("cycle-loading"),a.API.add(b)}else g.apply(a.API)}),h&&(f.prev=function(){var a=this.opts();if(d.length&&0===a.currSlide){var b=d.length-1,c=d[b];d=d.slice(0,b),a.container.one("cycle-slide-added",function(a,b){b.currSlide=1,b.API.advanceSlide(-1),b.container.removeClass("cycle-loading")}),a.container.addClass("cycle-loading"),a.API.add(c,!0)}else h.apply(a.API)})}})}(jQuery),/*! tmpl plugin for Cycle2;  version: 20121227 */
 function(a){"use strict";a.extend(a.fn.cycle.defaults,{tmplRegex:"{{((.)?.*?)}}"}),a.extend(a.fn.cycle.API,{tmpl:function(b,c){var d=new RegExp(c.tmplRegex||a.fn.cycle.defaults.tmplRegex,"g"),e=a.makeArray(arguments);return e.shift(),b.replace(d,function(b,c){var d,f,g,h,i=c.split(".");for(d=0;d<e.length;d++)if(g=e[d]){if(i.length>1)for(h=g,f=0;f<i.length;f++)g=h,h=h[i[f]]||c;else h=g[c];if(a.isFunction(h))return h.apply(g,e);if(void 0!==h&&null!==h&&h!=c)return h}return c})}})}(jQuery);
 //# sourceMappingURL=jquery.cycle2.js.map
+
+
+
+/* Plugin for Cycle2; Copyright (c) 2012 M. Alsup; v20140128 */
+(function(e){"use strict";e.event.special.swipe=e.event.special.swipe||{scrollSupressionThreshold:10,durationThreshold:1e3,horizontalDistanceThreshold:30,verticalDistanceThreshold:75,setup:function(){var i=e(this);i.bind("touchstart",function(t){function n(i){if(r){var t=i.originalEvent.touches?i.originalEvent.touches[0]:i;s={time:(new Date).getTime(),coords:[t.pageX,t.pageY]},Math.abs(r.coords[0]-s.coords[0])>e.event.special.swipe.scrollSupressionThreshold&&i.preventDefault()}}var s,o=t.originalEvent.touches?t.originalEvent.touches[0]:t,r={time:(new Date).getTime(),coords:[o.pageX,o.pageY],origin:e(t.target)};i.bind("touchmove",n).one("touchend",function(){i.unbind("touchmove",n),r&&s&&s.time-r.time<e.event.special.swipe.durationThreshold&&Math.abs(r.coords[0]-s.coords[0])>e.event.special.swipe.horizontalDistanceThreshold&&Math.abs(r.coords[1]-s.coords[1])<e.event.special.swipe.verticalDistanceThreshold&&r.origin.trigger("swipe").trigger(r.coords[0]>s.coords[0]?"swipeleft":"swiperight"),r=s=void 0})})}},e.event.special.swipeleft=e.event.special.swipeleft||{setup:function(){e(this).bind("swipe",e.noop)}},e.event.special.swiperight=e.event.special.swiperight||e.event.special.swipeleft})(jQuery);
+
+(function (window) {
+    // This library re-implements setTimeout, setInterval, clearTimeout, clearInterval for iOS6.
+    // iOS6 suffers from a bug that kills timers that are created while a page is scrolling.
+    // This library fixes that problem by recreating timers after scrolling finishes (with interval correction).
+    // This code is free to use by anyone (MIT, blabla).
+    // Original Author: rkorving@wizcorp.jp
+    var timeouts = {};
+    var intervals = {};
+    var orgSetTimeout = window.setTimeout;
+    var orgSetInterval = window.setInterval;
+    var orgClearTimeout = window.clearTimeout;
+    var orgClearInterval = window.clearInterval;
+    // To prevent errors if loaded on older IE.
+    if (!window.addEventListener) return false;
+    function createTimer(set, map, args) {
+        var id, cb = args[0],
+            repeat = (set === orgSetInterval);
+
+        function callback() {
+            if (cb) {
+                cb.apply(window, arguments);
+                if (!repeat) {
+                    delete map[id];
+                    cb = null;
+                }
+            }
+        }
+        args[0] = callback;
+        id = set.apply(window, args);
+        map[id] = {
+            args: args,
+            created: Date.now(),
+            cb: cb,
+            id: id
+        };
+        return id;
+    }
+
+    function resetTimer(set, clear, map, virtualId, correctInterval) {
+        var timer = map[virtualId];
+        if (!timer) {
+            return;
+        }
+        var repeat = (set === orgSetInterval);
+        // cleanup
+        clear(timer.id);
+        // reduce the interval (arg 1 in the args array)
+        if (!repeat) {
+            var interval = timer.args[1];
+            var reduction = Date.now() - timer.created;
+            if (reduction < 0) {
+                reduction = 0;
+            }
+            interval -= reduction;
+            if (interval < 0) {
+                interval = 0;
+            }
+            timer.args[1] = interval;
+        }
+        // recreate
+        function callback() {
+            if (timer.cb) {
+                timer.cb.apply(window, arguments);
+                if (!repeat) {
+                    delete map[virtualId];
+                    timer.cb = null;
+                }
+            }
+        }
+        timer.args[0] = callback;
+        timer.created = Date.now();
+        timer.id = set.apply(window, timer.args);
+    }
+    window.setTimeout = function () {
+        return createTimer(orgSetTimeout, timeouts, arguments);
+    };
+    window.setInterval = function () {
+        return createTimer(orgSetInterval, intervals, arguments);
+    };
+    window.clearTimeout = function (id) {
+        var timer = timeouts[id];
+        if (timer) {
+            delete timeouts[id];
+            orgClearTimeout(timer.id);
+        }
+    };
+    window.clearInterval = function (id) {
+        var timer = intervals[id];
+        if (timer) {
+            delete intervals[id];
+            orgClearInterval(timer.id);
+        }
+    };
+    //check and add listener on the top window if loaded on frameset/iframe
+    var win = window;
+    while (win.location != win.parent.location) {
+        win = win.parent;
+    }
+    win.addEventListener('scroll', function () {
+        // recreate the timers using adjusted intervals
+        // we cannot know how long the scroll-freeze lasted, so we cannot take that into account
+        var virtualId;
+        for (virtualId in timeouts) {
+            resetTimer(orgSetTimeout, orgClearTimeout, timeouts, virtualId);
+        }
+        for (virtualId in intervals) {
+            resetTimer(orgSetInterval, orgClearInterval, intervals, virtualId);
+        }
+    });
+}(window));

@@ -13603,7 +13603,7 @@ body {
   position: relative;
   text-transform: uppercase;
   transition: all 0.3s;
-  z-index: 0;
+  z-index: 1006;
 }
 .btn:after {
   content: '';
@@ -13637,7 +13637,7 @@ header {
   text-align: center;
   top: 0px;
   width: 100%;
-  z-index: 999;
+  z-index: 1999;
   color: #fff;
   background-color: None;
 }
@@ -13709,22 +13709,44 @@ header .telefono {
   position: absolute;
   top: 0;
   width: 100%;
+  z-index: 1000;
 }
 #Cont-Slides article h2 {
   display: block;
   font-size: 6em;
+  letter-spacing: 3px;
   margin: 1.5em auto 0.3em auto;
   position: relative;
   text-align: center;
   text-transform: uppercase;
-  letter-spacing: 3px;
+  width: 60%;
+  z-index: 1003;
 }
 #Cont-Slides article p {
   display: block;
   font-family: "Roboto", Arial, sans-serif;
   font-size: 1.1em;
   font-weight: 300;
+  margin: 0 auto 2.2em auto;
   position: relative;
   text-align: center;
-  margin-bottom: 2.2em;
+  width: 60%;
+  z-index: 1003;
+}
+.btn-ctrl {
+  border: none;
+  cursor: pointer;
+  display: block;
+  min-height: 100%;
+  min-width: 40%;
+  position: absolute;
+  top: 0;
+  z-index: 1001;
+}
+.btn-sig {
+  right: 0px;
+  cursor: url("../img/cursors/cursor_next_white.png"), auto;
+}
+.btn-ant {
+  cursor: url("../img/cursors/cursor_prev_white.png"), auto;
 }
