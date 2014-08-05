@@ -15,11 +15,17 @@
 					<img src="{{ MEDIA_URL }}{{slide.imagen}}" alt="{{slide.nombre}}">
 					<div class="btn-ant btn-ctrl"> </div>
 					<div class="btn-sig btn-ctrl"> </div>
-					{% autoescape off %}
-						{{slide.html}}
-					{% endautoescape %}
+					{% autoescape off %}{{slide.html}}{% endautoescape %}
 				</article>
 			{% endfor %}
 		</section>
 	{% endif %}
+
+<p class="texto-vertical">
+	Diseño y desarrollo web hecho en México por Grupo Kimera / Siguenos en: <a href="#">Behance</a> / <a href="">LinkedIn</a> / <a href="">Facebook</a> / <a href="">Twitter</a>
+</p>
+
+<div class="icon-up">
+	<i class="fa fa-chevron-up"></i>
+</div>
 {% endblock content %}

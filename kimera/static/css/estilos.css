@@ -13568,6 +13568,10 @@ Copyright (c) 2014 Daniel Eden
 }
 .icon-menu:before {
   content: "\e600";
+  margin-right: 0.2em;
+  vertical-align: sub;
+  font-size: 1.5em;
+  font-weight: 100;
 }
 /* Estilos generales. grupokimera.com */
 html,
@@ -13646,17 +13650,41 @@ body {
   animation-delay: 2s;
   animation-iteration-count: 2;
 }
+.texto-vertical {
+  -moz-transform: rotate(-90deg);
+  -webkit-transform: rotate(-90deg);
+  color: #fff;
+  font-family: "Times New Roman", Georgia, Serif;
+  font-size: 0.75em;
+  position: absolute;
+  right: -18.6em;
+  top: 27em;
+  z-index: 10010;
+}
+.icon-up {
+  background: #000;
+  bottom: 0px;
+  color: #fff;
+  display: inline-block;
+  font-size: 2em;
+  height: 60px;
+  position: absolute;
+  right: 1em;
+  text-align: center;
+  width: 45px;
+  z-index: 1010;
+}
 /* Estilo header grupokimera.com */
 header {
   display: block;
-  height: 120px;
+  height: 90px;
   position: absolute;
   text-align: center;
   top: 0px;
   width: 100%;
   z-index: 1999;
   color: #fff;
-  background-color: None;
+  background-color: transparent;
 }
 header a,
 header .telefono {
@@ -13666,10 +13694,9 @@ header .telefono {
 header a {
   font-family: "novecento_sans_widedemibold", Arial, san-serif;
   font-size: 2em;
-  font-style: None;
-  font-weight: 800 !important;
-  margin: 1.2em 0 0 2.5em;
-  padding-left: 0.5em;
+  font-weight: 600 !important;
+  margin: 1em 0 0 0;
+  padding-left: 1.2em;
   left: 0px;
   text-decoration: None;
 }
@@ -13768,46 +13795,38 @@ header .telefono {
 .btn-ant {
   cursor: url("../img/cursors/cursor_prev_white.png"), auto;
 }
-.cbp-spmenu {
-  background: #47a3da;
-  position: fixed;
-}
-.cbp-spmenu h3 {
-  color: #afdefa;
-  font-size: 1.9em;
-  padding: 20px;
-  margin: 0;
-  font-weight: 300;
-  background: #0d77b6;
-}
-.cbp-spmenu a {
-  display: block;
-  color: #fff;
-  font-size: 1.1em;
-  font-weight: 300;
-}
-.cbp-spmenu a:hover {
-  background: #258ecd;
-}
-.cbp-spmenu a:active {
-  background: #afdefa;
-  color: #47a3da;
-}
-.cbp-spmenu-vertical {
-  width: 240px;
+nav {
+  background: #0d0d0d;
   height: 100%;
+  padding-top: 4.5em;
+  position: fixed;
   top: 0;
+  width: 300px;
   z-index: 1000;
 }
-.cbp-spmenu-vertical a {
-  border-bottom: 1px solid #258ecd;
+nav ul {
+  padding: 0 1.5em 0 1.5em;
+}
+nav a {
+  border-bottom: 3px solid #1b1b1b;
+  color: #fff;
+  display: block;
+  font-size: 1.2em;
+  font-weight: 300;
   padding: 1em;
 }
+nav a:hover {
+  background: #808080;
+  text-shadow: 1px 1px 1px #000;
+}
+nav a:active {
+  background: #808080;
+}
 .cbp-spmenu-left {
-  left: -240px;
+  left: -300px;
 }
 .cbp-spmenu-right {
-  right: -240px;
+  right: -300px;
 }
 .cbp-spmenu-left.cbp-spmenu-open {
   left: 0px;
@@ -13826,37 +13845,12 @@ header .telefono {
   position: relative;
   left: 0;
 }
-.cbp-spmenu-push-toright {
-  left: 240px;
-}
-.cbp-spmenu-push-toleft {
-  left: -240px;
-}
-@media screen and (max-width: 55.1875em) {
-  .cbp-spmenu-horizontal {
-    font-size: 75%;
-    height: 110px;
-  }
-  .cbp-spmenu-top {
-    top: -110px;
-  }
-  .cbp-spmenu-bottom {
-    bottom: -110px;
-  }
-}
 @media screen and (max-height: 26.375em) {
-  .cbp-spmenu-vertical {
+  nav {
     font-size: 90%;
     width: 190px;
   }
-  .cbp-spmenu-left,
-  .cbp-spmenu-push-toleft {
+  .cbp-spmenu-left {
     left: -190px;
-  }
-  .cbp-spmenu-right {
-    right: -190px;
-  }
-  .cbp-spmenu-push-toright {
-    left: 190px;
   }
 }
