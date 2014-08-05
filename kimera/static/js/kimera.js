@@ -1,14 +1,20 @@
-var KimeraFns = {
+var Kimera = {
 	init:function(){
-		// alert("Esto es una prueba");
+		this.menu();
 	},
-	// StartSlideHome: function(){
-	// 	alert("se ejecuto StartSlideHome");
-	// },
-	// CallOtherFn: function(){
-	// 	alert("otra funcion");
-	// 	this.StartSlideHome();
-	// }
+	menu: function(){
+		var menuLeft = document.getElementById( 'cbp-spmenu-s1' ),
+		    showLeft = document.getElementById( 'menu-main' ),
+		    body = document.body;
+ 
+		showLeft.onclick = function(e) {
+			e.preventDefault();
+			var btn = $("this");
+			btn.toggleClass('active');
+			$(menuLeft).toggleClass("cbp-spmenu-open");
+		};
+		
+	}
 }
 
-KimeraFns.init();
+Kimera.init();
