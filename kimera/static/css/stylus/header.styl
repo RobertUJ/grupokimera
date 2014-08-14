@@ -1,39 +1,91 @@
 /*! Estilo header grupokimera.com */
+$azul-bg = rgba(4,12,28,0.5)
 header
+	background-color rgba(4,12,28,0.5)
+	color #fff
 	display block
-	height 90px
+	height 100px
+	padding 0px
 	position absolute
-	text-align center
+	text-align left
 	top 0px
 	width 100%
 	z-index 1999
-	color white
-	background-color transparent
-
-	a
-	.telefono
-		position absolute
-		top 0px
-	a
-		font-family "novecento_sans_widedemibold" ,Arial, san-serif
-		font-size 2em
-		font-weight: 600 !important;
-		margin 1em 0 0 0
-		padding-left 1.2em
-		left 0px
-		text-decoration None
 	figure
+		float left
+		width 25%
+		margin 0 0 0 2%
 		display inline-block
+		img
+			width 20em
+			height auto
+			margin-top 0.2em
+	nav
+		display inline-block
+		height 100% 
 		margin 0px
 		padding 0px
-		width 408px
-
-	.telefono
+		text-align right
+		width 61%
+		ul
+			list-style none
+			margin 2.5em 0 0 0
+			padding 0px
+			text-align right
+			width auto
+			li
+				display inline-block
+				&:last-child a
+					padding-right 0px !important
+				a
+					font-size 0.9em
+					font-weight 300
+					padding 0em 0em
+				&:after
+					content ""
+				&:first-child a
+					padding-left 0px !important
+				&:last-child:after
+					content ""
+				&:after
+					content "/"
+					font-size 1em
+					font-weight 100
+					vertical-align middle
+					padding 0px 1em
+	.cont-social
+		display inline-block
+		height 100px
 		position absolute
 		right 0px
 		top 0px
-		margin 1.5em 5em 0 0
-
+		width 12%
+		ul
+			margin 1.6em 0 0 0
+			padding 0px
+			list-style none
+			li
+				display inline-block
+				a
+					background url(../img/sprite_social.png) top left
+					display inline-block
+					height 40px
+					width 40px
+					transition background-position 200ms ease
+					-webkit-transition background-position 200ms ease
+					-moz-transition background-position 200ms ease
+					-o-transition background-position 200ms ease
+					&:hover
+						background-position-y 42px
+					&.twitter
+						background-position-x 85px
+						&:hover
+							background-position 83px 42px
+					&.idioma
+						background-position-x 170px 
+						&:hover
+							background-position-y 42px
+					
 
 .titulo
 	font-family "novecento_sans_widenormal",Arial, san-serif

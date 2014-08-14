@@ -1,18 +1,23 @@
 {% load static from staticfiles %}
 <header>
-	<a id="menu-main" href="#" class="icon-menu link-main-menu">MENU</a>
 	<figure>
-		<img src="{% static "img/logo.png" %}" alt="Desarrollo de sitios web en México" width="408" height="126" />
+		<a href=""><img src="{% static "img/logo.png" %}" alt="Desarrollo de sitios web en México" width="408" height="126" /></a>
 	</figure>
-	<h2 class="telefono">+52 (656) 379.7462</h2>
+    <nav>
+        <ul>
+            <li><a href="#">INICIO</a></li>
+            <li><a href="#">SERVICIOS</a></li>
+            <li><a href="#">PORTAFOLIO</a></li>
+            <li><a href="#">BLOG</a></li>
+            <li><a href="#">NOSOTROS</a></li>
+            <li><a href="#">CONTACTO</a></li>
+        </ul>
+    </nav>
+    <div class="cont-social">
+        <ul>
+            <li><a target="_blank" class="social facebook" href="https://www.facebook.com/kimerastudio"></a></li>
+            <li><a target="_blank" class="social twitter" href="https://twitter.com/kimeramx"></a></li>
+            <li><a target="_blank" class="social idioma" href="#"></a></li>
+        </ul>
+    </div>
 </header>
-<nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left" id="cbp-spmenu-s1">
-    <ul>
-        <li><a href="#">INICIO</a></li>
-        <li><a href="#">SERVICIOS</a></li>
-        <li><a href="#">PORTAFOLIO</a></li>
-        <li><a href="#">BLOG</a></li>
-        <li><a href="#">NOSOTROS</a></li>
-        <li><a href="#">CONTACTO</a></li>
-    </ul>
-</nav>
