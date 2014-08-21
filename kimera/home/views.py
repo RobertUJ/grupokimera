@@ -1,7 +1,4 @@
-from django.shortcuts import render, render_to_response
-from django.template import RequestContext
 from .models import SlideHome
-
 from django.views.generic.base import TemplateView
 
 
